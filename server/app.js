@@ -1,7 +1,19 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
-const port = 3000;
+// This is how you require the extern custom module using js
+// const User = require('./model/user');
+
+
+// Dotenv
+dotenv.config({path: './config.env'});
+const port = process.env.PORT;
+
+// Mongoose
+require('./db/connect');
+
 
 const middleware = (req, res, next) => {
     console.log("Waiting for login");
