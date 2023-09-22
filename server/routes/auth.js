@@ -18,32 +18,93 @@ router.get('/about', middleware, (req, res) => {
     res.send("This is about page");
 });
 
-router.post('/register', (req, res) => {
-    const {name, email, phone, password, cpassword} = req.body;
-    // res.json({message: req.body});
-    
-    if(!name || !email || !phone || !password || !cpassword) {
-        return res.status(422).json({error: "Details are not entered properly"});
-    } 
+// Registration
 
-    // databaseAttributeName:variableName
-    // response is simply if user exist with that particular email exists or not
-    User.findOne({email:email}).then((response) => {
-        if(response) {
-            return res.status(422).json({error: "Email is already in use"});
+// Async-Await method
+router.post('/register', async (req, res) => {
+    const { name, email, phone, password, cpassword } = req.body;
+
+    try {
+        if (!name || !email || !phone || !password || !cpassword) {
+            return res.status(422).json({ error: "Details are not entered properly" });
+        }
+        const response = await User.findOne({ email: email });
+
+        if (response) {
+            res.status(422).json({ error: "Email is already in use" });
+        }
+        else {
+            const user = new User({ name, email, phone, password, cpassword });
+
+            const userSave = await user.save();
+
+            // res.status(201).json({success:"User registered successfully"});
+
+            if (userSave) {
+                res.status(201).json({ success: "User registered successfully" });
+
+            }
         }
 
-        const user = new User({name, email, phone, password, cpassword});
+    } catch (error) {
+        console.log(error);
+    }
 
-        user.save().then(() => {
-            res.status(201).json({message: "User registered successfully"}) 
-        }).catch((error) => {
-            res.status(500).json({message: "User was unable to register due to internal server error"})
-        })
-    }).catch(err => {
-        console.log(err);
-    })
-    
+});
+
+// Promises method
+
+// router.post('/register', (req, res) => {
+//     const {name, email, phone, password, cpassword} = req.body;
+//     // res.json({message: req.body});
+
+//     if(!name || !email || !phone || !password || !cpassword) {
+//         return res.status(422).json({error: "Details are not entered properly"});
+//     } 
+
+//     // databaseAttributeName:variableName
+//     // response is simply if user exist with that particular email exists or not
+//     User.findOne({email:email}).then((response) => {
+//         if(response) {
+//             return res.status(422).json({error: "Email is already in use"});
+//         }
+
+//         const user = new User({name, email, phone, password, cpassword});
+
+//         user.save().then(() => {
+//             res.status(201).json({message: "User registered successfully"}) 
+//         }).catch((error) => {
+//             res.status(500).json({message: "User was unable to register due to internal server error"})
+//         })
+//     }).catch(err => {
+//         console.log(err);
+//     })
+
+// });
+
+
+// Login
+router.post('/login', async (req, res) => {
+    try {
+
+        const { email, password } = req.body;
+        if (!email || !password) {
+            res.status(400).json({ message: "Please enter the details properly" });
+        }
+        else {
+            const user = await User.findOne({ email: email });
+            if (user) {
+                res.status(200).json({ message: "Succesfully logged in" });
+                console.log(user);
+            }
+            else {
+                res.status(404).json({ message: "User not found" })
+            }
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 module.exports = router;
