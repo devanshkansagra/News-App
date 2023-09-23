@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../model/user');
+const bycrypt = require('bcryptjs');
 
 require("../db/connect");
 
@@ -95,18 +96,20 @@ router.post('/login', async (req, res) => {
         }
         else {
             const user = await User.findOne({ email: email });
-            if (user) {
+
+            const comparePassword = await bycrypt.compare(password, user.password);
+            
+            if (user && comparePassword) {
                 res.status(200).json({ message: "Succesfully logged in" });
-                console.log(user);
             }
             else {
-                res.status(404).json({ message: "User not found" });
+                res.status(404).json({ message: "Invalid Credentials" });
             }
             
         }
 
     } catch (error) {
-        console.log(error);
+        res.status(404).json({error: "User not found"});
     }
 });
 
