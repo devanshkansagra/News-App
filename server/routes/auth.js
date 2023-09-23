@@ -30,15 +30,17 @@ router.post('/register', async (req, res) => {
         }
         const response = await User.findOne({ email: email });
 
+        // Email Validation
         if (response) {
             res.status(422).json({ error: "Email is already in use" });
+        }
+        else if (password != cpassword) {
+            res.status(401).json({ error: "Passwords doesn't match" });
         }
         else {
             const user = new User({ name, email, phone, password, cpassword });
 
             const userSave = await user.save();
-
-            // res.status(201).json({success:"User registered successfully"});
 
             if (userSave) {
                 res.status(201).json({ success: "User registered successfully" });
@@ -98,8 +100,9 @@ router.post('/login', async (req, res) => {
                 console.log(user);
             }
             else {
-                res.status(404).json({ message: "User not found" })
+                res.status(404).json({ message: "User not found" });
             }
+            
         }
 
     } catch (error) {
