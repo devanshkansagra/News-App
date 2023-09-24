@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
 const User = require('../model/user');
@@ -88,6 +89,7 @@ router.post('/register', async (req, res) => {
 
 // Login
 router.post('/login', async (req, res) => {
+    let tokenUser;
     try {
 
         const { email, password } = req.body;
@@ -97,8 +99,14 @@ router.post('/login', async (req, res) => {
         else {
             const user = await User.findOne({ email: email });
 
+            tokenUser = await user.generateAuthToken();
+
             const comparePassword = await bycrypt.compare(password, user.password);
             
+            if(tokenUser) {
+                console.log(tokenUser);
+            }
+
             if (user && comparePassword) {
                 res.status(200).json({ message: "Succesfully logged in" });
             }

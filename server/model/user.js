@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const bycrypt = require('bcryptjs');
 
@@ -21,7 +22,15 @@ const userSchema = new mongoose.Schema({
     cpassword: {
         type: String,
         required: true
-    }
+    },
+    tokens: [
+        {
+            token: {
+                type: String,
+                required: true
+            }
+        }
+    ]
 })
 
 // Hashing the password
@@ -32,6 +41,19 @@ userSchema.pre('save', async function (next) {
     }
     next();
 });
+
+// Generating the authentication token
+userSchema.methods.generateAuthToken = async function() {
+    try {
+        let tokenUser = jwt.sign({_id: this._id}, process.env.SECRETKEY);
+        this.tokens = this.tokens.concat({token: tokenUser});
+        await this.save();
+        return tokenUser;
+        
+    } catch (error) {
+        res.status(400).json({error: "Error 400"});
+    }
+}
 
 const User = mongoose.model('USERS', userSchema);
 
