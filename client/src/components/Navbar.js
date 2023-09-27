@@ -49,13 +49,13 @@ function Navbar() {
                                     <li>
                                         <button className="dropdown-item d-flex justify-content-between" onClick={changeToLight}>
                                             <div className="lightMode">Light</div>
-                                            <div className="lightModeIco"><i class="fa-solid fa-sun"></i></div>
+                                            <div className="lightModeIco"><i className="fa-solid fa-sun"></i></div>
                                         </button>
                                     </li>
                                     <li>
                                         <button className="dropdown-item d-flex justify-content-between" onClick={changeToDark}>
                                             <div className="darkMode">Dark</div>
-                                            <div className="darkModeIco"><i class="fa-solid fa-moon"></i></div>
+                                            <div className="darkModeIco"><i className="fa-solid fa-moon"></i></div>
                                         </button>
                                     </li>
                                 </ul>

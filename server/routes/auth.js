@@ -6,28 +6,28 @@ const bycrypt = require('bcryptjs');
 
 require("../db/connect");
 
-router.get('/', (req, res) => {
-    res.send('This is a message from express router');
-});
+// router.get('/', (req, res) => {
+//     res.send('This is a message from express router');
+// });
 
-const middleware = (req, res, next) => {
-    console.log("Waiting for login");
-    next();
-}
+// const middleware = (req, res, next) => {
+//     console.log("Waiting for login");
+//     next();
+// }
 
-router.get('/about', middleware, (req, res) => {
-    console.log("Login Successful");
-    res.send("This is about page");
-});
+// router.get('/about', middleware, (req, res) => {
+//     console.log("Login Successful");
+//     res.send("This is about page");
+// });
 
 // Registration
 
 // Async-Await method
 router.post('/register', async (req, res) => {
-    const { name, email, phone, password, cpassword } = req.body;
+    const { firstName, lastName, userName, email, phone, password, cpassword } = req.body;
 
     try {
-        if (!name || !email || !phone || !password || !cpassword) {
+        if (!firstName || !lastName || !userName || !email || !phone || !password || !cpassword) {
             return res.status(422).json({ error: "Details are not entered properly" });
         }
         const response = await User.findOne({ email: email });
@@ -40,7 +40,7 @@ router.post('/register', async (req, res) => {
             res.status(401).json({ error: "Passwords doesn't match" });
         }
         else {
-            const user = new User({ name, email, phone, password, cpassword });
+            const user = new User({ firstName, lastName, userName, email, phone, password, cpassword });
 
             const userSave = await user.save();
 
@@ -102,8 +102,8 @@ router.post('/login', async (req, res) => {
             tokenUser = await user.generateAuthToken();
 
             const comparePassword = await bycrypt.compare(password, user.password);
-            
-            if(tokenUser) {
+
+            if (tokenUser) {
                 console.log(tokenUser);
             }
 
@@ -113,11 +113,11 @@ router.post('/login', async (req, res) => {
             else {
                 res.status(404).json({ message: "Invalid Credentials" });
             }
-            
+
         }
 
     } catch (error) {
-        res.status(404).json({error: "User not found"});
+        res.status(404).json({ error: "User not found" });
     }
 });
 
