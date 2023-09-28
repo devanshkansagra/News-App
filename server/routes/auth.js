@@ -99,13 +99,7 @@ router.post('/login', async (req, res) => {
         else {
             const user = await User.findOne({ email: email });
 
-            tokenUser = await user.generateAuthToken();
-
             const comparePassword = await bycrypt.compare(password, user.password);
-
-            if (tokenUser) {
-                console.log(tokenUser);
-            }
 
             if (user && comparePassword) {
                 res.status(200).json({ message: "Succesfully logged in" });
