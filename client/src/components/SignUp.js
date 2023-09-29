@@ -45,8 +45,14 @@ function SignUp() {
         const response = await data.json();
 
         // Checking the status
-        if (response.status === 422 || !response) {
-            window.alert("Unable to register");
+        if (data.status === 422) {
+            window.alert("Email is already in use");
+        }
+        else if (data.status === 401) {
+            window.alert("Passwords Doesn't match");
+        }
+        else if(!response) {
+            window.alert("Unable to register user")
         }
         else {
             window.alert("Registered Successfully");

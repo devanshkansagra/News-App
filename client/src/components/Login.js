@@ -11,11 +11,33 @@ function Login() {
     })
 
     let name, value;
-    function handleInputs(event) {
+    const handleInputs = (event) => {
         name = event.target.name;
         value = event.target.value;
 
-        setlogin(...login, {[name]:value});
+        setlogin({ ...login, [name]: value });
+    }
+
+    const loginUser = async (e) => {
+        e.preventDefault();
+        const data = await fetch('/login', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body : JSON.stringify({
+                email:login.email, password:login.password
+            })
+        });
+
+        const response = await data.json();
+
+        if(data.status === 404 || !response) {
+            window.alert("Invalid Credentials");
+        }
+        else {
+            window.alert("User Logged in successfully");
+        }
     }
     return (
         <>
@@ -30,7 +52,7 @@ function Login() {
                             <h1 className="modal-title fs-5" id="staticBackdropLabel">Login To your account</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="/login" method="post">
+                        <form method="post">
                             <div className="modal-body">
                                 <div className="mb-3">
                                     <label htmlFor="emailLogin" className="form-label">Email address</label>
@@ -38,9 +60,9 @@ function Login() {
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="passwordLogin" className="form-label">Password</label>
-                                    <input type="email" className="form-control" id="passwordLogin" placeholder="Password" value={login.password} onChange={handleInputs} name="password"/>
+                                    <input type="password" className="form-control" id="passwordLogin" placeholder="Password" value={login.password} onChange={handleInputs} name="password"/>
                                 </div>
-                                <button type="submit" className="btn btn-primary">Login</button>
+                                <button type="submit" className="btn btn-primary" onClick={loginUser}>Login</button>
                             </div>
                         </form>
                     </div>
