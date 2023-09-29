@@ -89,7 +89,7 @@ router.post('/register', async (req, res) => {
 
 // Login
 router.post('/login', async (req, res) => {
-    let tokenUser;
+    
     try {
 
         const { email, password } = req.body;
@@ -102,10 +102,12 @@ router.post('/login', async (req, res) => {
             const comparePassword = await bycrypt.compare(password, user.password);
 
             if (user && comparePassword) {
+                const token = await user.generateAuthToken();
+                console.log(token);
                 res.status(200).json({ message: "Succesfully logged in" });
             }
             else {
-                res.status(404).json({ message: "Invalid Credentials" });
+                res.status(400).json({ message: "Invalid Credentials" });
             }
 
         }

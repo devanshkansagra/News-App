@@ -67,6 +67,7 @@ function Navbar() {
 
                         {/* Signup form modal */}
                         <SignUp />
+                        
                     </div>
                 </div>
             </nav>

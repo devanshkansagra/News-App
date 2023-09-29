@@ -1,4 +1,4 @@
-import {React, useState} from 'react'
+import { React, useState } from 'react'
 
 function Login() {
 
@@ -19,24 +19,29 @@ function Login() {
     }
 
     const loginUser = async (e) => {
-        e.preventDefault();
-        const data = await fetch('/login', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body : JSON.stringify({
-                email:login.email, password:login.password
-            })
-        });
+        try {
+            e.preventDefault();
+            const data = await fetch('/login', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: login.email, password: login.password
+                })
+            });
 
-        const response = await data.json();
+            const response = await data.json();
 
-        if(data.status === 404 || !response) {
-            window.alert("Invalid Credentials");
-        }
-        else {
-            window.alert("User Logged in successfully");
+            if (data.status === 404 || !response) {
+                window.alert("Invalid Credentials");
+            }
+            else {
+                window.alert("User Logged in successfully");
+            }
+
+        } catch (error) {
+            window.alert('User not found');
         }
     }
     return (
@@ -56,11 +61,11 @@ function Login() {
                             <div className="modal-body">
                                 <div className="mb-3">
                                     <label htmlFor="emailLogin" className="form-label">Email address</label>
-                                    <input type="email" className="form-control" id="emailLogin" placeholder="name@example.com" value={login.email} onChange={handleInputs} name="email"/>
+                                    <input type="email" className="form-control" id="emailLogin" placeholder="name@example.com" value={login.email} onChange={handleInputs} name="email" />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="passwordLogin" className="form-label">Password</label>
-                                    <input type="password" className="form-control" id="passwordLogin" placeholder="Password" value={login.password} onChange={handleInputs} name="password"/>
+                                    <input type="password" className="form-control" id="passwordLogin" placeholder="Password" value={login.password} onChange={handleInputs} name="password" />
                                 </div>
                                 <button type="submit" className="btn btn-primary" onClick={loginUser}>Login</button>
                             </div>
