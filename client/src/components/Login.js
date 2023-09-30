@@ -44,6 +44,14 @@ function Login() {
             window.alert('User not found');
         }
     }
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleShowPassword = () => {
+        setShowPassword(!showPassword);
+    }
+
+
     return (
         <>
             <button type="button" className="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#login">
@@ -65,7 +73,26 @@ function Login() {
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="passwordLogin" className="form-label">Password</label>
-                                    <input type="password" className="form-control" id="passwordLogin" placeholder="Password" value={login.password} onChange={handleInputs} name="password" />
+                                    <div className="input-group">
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            className="form-control"
+                                            id="passwordLogin"
+                                            placeholder="Password"
+                                            value={login.password}
+                                            onChange={handleInputs}
+                                            name="password"
+                                        />
+                                        <div className="input-group-append">
+                                            <button
+                                                className="btn btn-outline-secondary"
+                                                type="button"
+                                                onClick={handleShowPassword}
+                                            >
+                                                {showPassword ? "Hide" : "Show"}
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <button type="submit" className="btn btn-primary" onClick={loginUser}>Login</button>
                             </div>

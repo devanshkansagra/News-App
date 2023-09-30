@@ -51,12 +51,18 @@ function SignUp() {
         else if (data.status === 401) {
             window.alert("Passwords Doesn't match");
         }
-        else if(!response) {
+        else if (!response) {
             window.alert("Unable to register user")
         }
         else {
             window.alert("Registered Successfully");
         }
+    }
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleShowPassword = () => {
+        setShowPassword(!showPassword);
     }
     return (
 
@@ -96,11 +102,49 @@ function SignUp() {
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="signupPassword" className="form-label">Password</label>
-                                    <input type="password" value={user.password} className="form-control" id="signupPassword" placeholder="Password" onChange={handleInputs} name="password" />
+                                    <div className="input-group">
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            value={user.password}
+                                            className="form-control"
+                                            id="signupPassword"
+                                            placeholder="Password"
+                                            onChange={handleInputs}
+                                            name="password"
+                                        />
+                                        <div className="input-group-append">
+                                            <button
+                                                className="btn btn-outline-secondary"
+                                                type="button"
+                                                onClick={handleShowPassword}
+                                            >
+                                                {showPassword ? "Hide" : "Show"}
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="signupCpassword" className="form-label">Confirm Password</label>
-                                    <input type="password" value={user.cpassword} className="form-control" id="signupCpassword" placeholder="Confirm password" onChange={handleInputs} name="cpassword" />
+                                    <div className="input-group">
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            value={user.cpassword}
+                                            className="form-control"
+                                            id="signupCpassword"
+                                            placeholder="Confirm password"
+                                            onChange={handleInputs}
+                                            name="cpassword"
+                                        />
+                                        <div className="input-group-append">
+                                            <button
+                                                className="btn btn-outline-secondary"
+                                                type="button"
+                                                onClick={handleShowPassword}
+                                            >
+                                                {showPassword ? "Hide" : "Show"}
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 {/* Error: Cannot post the data */}
