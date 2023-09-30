@@ -4,6 +4,8 @@ const router = express.Router();
 const User = require('../model/user');
 const bycrypt = require('bcryptjs');
 
+const Authenticate = require('../middleware/authenticate');
+
 require("../db/connect");
 
 // router.get('/', (req, res) => {
@@ -116,5 +118,9 @@ router.post('/login', async (req, res) => {
         res.status(404).json({ error: "User not found" });
     }
 });
+
+router.get('/account', Authenticate, (req, res) => {
+
+})
 
 module.exports = router;
