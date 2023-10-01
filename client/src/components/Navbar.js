@@ -1,6 +1,7 @@
-import React from 'react'
+// import React, { useState } from 'react'
 import Login from './Login';
 import SignUp from './SignUp';
+import { Link } from 'react-router-dom'
 
 function Navbar() {
 
@@ -10,41 +11,34 @@ function Navbar() {
     function changeToLight() {
         document.body.setAttribute("data-bs-theme", "light");
     }
+    
+
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="/">News App</a>
+                    <Link className="navbar-brand" to="/">Dailyscope News</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/">All</a>
+                                <Link className="nav-link" aria-current="page" to="/">All</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/science">Science & Technology</a>
+                                <Link className="nav-link" to="/science">Science & Technology</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/sports">Sports</a>
+                                <Link className="nav-link" to="/politics">Politics</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/entertainment">Entertainment</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/fashion">Fashion</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/politics">Politics</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/education">Education</a>
+                                <Link className="nav-link" to="/education">Education</Link>
                             </li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div className="nav-link dropdown-toggle" to="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Change Theme
-                                </a>
+                                </div>
                                 <ul className="dropdown-menu">
                                     <li>
                                         <button className="dropdown-item d-flex justify-content-between" onClick={changeToLight}>
@@ -67,7 +61,7 @@ function Navbar() {
 
                         {/* Signup form modal */}
                         <SignUp />
-                        
+
                     </div>
                 </div>
             </nav>

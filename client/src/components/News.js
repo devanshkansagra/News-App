@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import NewsCard from './NewsCard';
 
-function News() {
+function News(props) {
   const [articles, setArticles] = useState([]);
 
   const getNews = async () => {
-    let url = "https://newsapi.org/v2/everything?q=India&apiKey=330e87d7b7a04229acbf2a4de862c4e0";
+    let url = `https://newsapi.org/v2/everything?q=${props.category}&apiKey=330e87d7b7a04229acbf2a4de862c4e0`;
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -16,8 +16,8 @@ function News() {
   }
 
   useEffect(() => {
-    getNews();
-  }, []); // empty dependency array to run once on component mount
+    getNews()
+  })
 
   return (
     <>

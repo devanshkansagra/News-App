@@ -8,3 +8,7 @@
   height: auto;
   object-fit: cover;
 }
+
+.navbar-toggler {
+  border: none
+}
