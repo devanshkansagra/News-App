@@ -1,24 +1,28 @@
-// import React, { useState } from 'react'
+import React, { useState } from 'react'
 import Login from './Login';
 import SignUp from './SignUp';
 import { Link } from 'react-router-dom'
 
-function Navbar() {
+function Navbar(props) {
 
+    let [search, setsearch] = useState("")
+
+    function handleSearch(e) {
+        search = e.target.value;
+        setsearch(search);
+    }
     function changeToDark() {
         document.body.setAttribute("data-bs-theme", "dark");
     }
     function changeToLight() {
         document.body.setAttribute("data-bs-theme", "light");
     }
-    
-
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to="/">Dailyscope News</Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <div className="navbar-brand">Dailyscope News</div>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collprops.categoryapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -30,15 +34,21 @@ function Navbar() {
                                 <Link className="nav-link" to="/science">Science & Technology</Link>
                             </li>
                             <li className="nav-item">
+                                <Link className="nav-link" to="/sports">Sports</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/entertainment">Entertainment</Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/politics">Politics</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/education">Education</Link>
                             </li>
                             <li className="nav-item dropdown">
-                                <div className="nav-link dropdown-toggle" to="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <Link className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Change Theme
-                                </div>
+                                </Link>
                                 <ul className="dropdown-menu">
                                     <li>
                                         <button className="dropdown-item d-flex justify-content-between" onClick={changeToLight}>
@@ -56,17 +66,19 @@ function Navbar() {
                             </li>
                         </ul>
 
+                        <form className="d-flex" role="search">
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={search} onChange={handleSearch}/>
+                                <button className="btn btn-outline-success" type="submit" onClick={props.getNews}>Search</button>
+                        </form>
+
                         {/* Login Form Modal */}
                         <Login />
-
                         {/* Signup form modal */}
                         <SignUp />
-
                     </div>
                 </div>
             </nav>
         </>
     )
 }
-
 export default Navbar

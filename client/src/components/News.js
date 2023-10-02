@@ -24,7 +24,7 @@ function News(props) {
       <div className="container-fluid mt-5 flex-wrap d-flex justify-content-evenly">
         {articles.map((article, index) => (
           <NewsCard 
-            key={index} // Use index as key if 'url' is not unique
+            key={index}
             title={article.title}
             urlToImage={article.urlToImage}
             url={article.url}
