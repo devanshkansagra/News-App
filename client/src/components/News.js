@@ -5,7 +5,7 @@ function News(props) {
   const [articles, setArticles] = useState([]);
 
   const getNews = async () => {
-    let url = `https://newsapi.org/v2/everything?q=${props.category}&apiKey=330e87d7b7a04229acbf2a4de862c4e0`;
+    let url = `https://newsapi.org/v2/everything?q=${props.category}&apiKey=9cb5f2027b8c4cf7aad0b28295ca669b`;
     try {
       const response = await fetch(url);
       const data = await response.json();
