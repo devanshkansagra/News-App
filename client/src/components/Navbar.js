@@ -1,16 +1,9 @@
-import React, { useState } from 'react'
+
 import Login from './Login';
 import SignUp from './SignUp';
 import { Link } from 'react-router-dom'
 
-function Navbar(props) {
-
-    let [search, setsearch] = useState("")
-
-    function handleSearch(e) {
-        search = e.target.value;
-        setsearch(search);
-    }
+function Navbar() {
     function changeToDark() {
         document.body.setAttribute("data-bs-theme", "dark");
     }
@@ -65,11 +58,6 @@ function Navbar(props) {
                                 </ul>
                             </li>
                         </ul>
-
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={search} onChange={handleSearch}/>
-                                <button className="btn btn-outline-success" type="submit" onClick={props.getNews}>Search</button>
-                        </form>
 
                         {/* Login Form Modal */}
                         <Login />
