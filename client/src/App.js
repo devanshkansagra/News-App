@@ -11,6 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={<News category="all"/>}/>
         <Route path='/science' element={<News category="science"/>}/>
+        <Route path='/sports' element={<News category="sports"/>}/>
         <Route path='/politics' element={<News category="politics"/>}/>
         <Route path='/entertainment' element={<News category="entertainment"/>}/>
         <Route path='/education' element={<News category="education"/>}/>
