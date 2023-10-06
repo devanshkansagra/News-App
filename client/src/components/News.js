@@ -5,7 +5,9 @@ function News(props) {
   const [articles, setArticles] = useState([]);
 
   let [search, setsearch] = useState("");
-  let [query, setquery] = useState(props.category);
+  let [query, setquery] = useState(null);
+
+  // setquery(props.category);
 
   const handleSearch = (e) => {
     search = e.target.value
@@ -14,12 +16,13 @@ function News(props) {
 
   const searchQuery = (e) => {
     e.preventDefault();
-    setquery(search);
+    query = search;
+    setquery(query);
   }
 
   useEffect(() => {
     const getNews = async () => {
-      let url = `https://newsapi.org/v2/everything?q=${query}&apiKey=330e87d7b7a04229acbf2a4de862c4e0`;
+      let url = `https://newsapi.org/v2/everything?q=${query || props.category}&apiKey=330e87d7b7a04229acbf2a4de862c4e0`;
       try {
         const response = await fetch(url);
         const data = await response.json();
