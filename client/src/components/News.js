@@ -7,8 +7,6 @@ function News(props) {
   let [search, setsearch] = useState("");
   let [query, setquery] = useState(null);
 
-  // setquery(props.category);
-
   const handleSearch = (e) => {
     search = e.target.value
     setsearch(search);
