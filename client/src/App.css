@@ -9,6 +9,7 @@
   object-fit: cover;
 }
 
-.navbar-toggler {
-  border: none
+.news-title {
+  font-weight: bold;
+  font-size: 3rem;
 }

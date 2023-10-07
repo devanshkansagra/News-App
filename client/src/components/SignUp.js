@@ -64,10 +64,15 @@ function SignUp() {
     const handleShowPassword = () => {
         setShowPassword(!showPassword);
     }
+
+    function clearInputs() {
+        setuser({ ...user, [name]: "" });
+
+    }
     return (
 
         <>
-            <button type="button" className="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#signup">
+            <button type="button" className="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#signup" onClick={clearInputs}>
                 Sign Up
             </button>
 

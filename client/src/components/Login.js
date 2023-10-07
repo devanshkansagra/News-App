@@ -2,18 +2,24 @@ import { React, useState } from 'react'
 
 function Login() {
 
-    const [login, setlogin] = useState({
-        email: "",
-        password: "",
-    })
+    // const [login, setlogin] = useState({
+    //     email: "",
+    //     password: "",
+    // })
 
-    let name, value;
-    const handleInputs = (event) => {
-        name = event.target.name;
-        value = event.target.value;
+    let [email, setemail] = useState("")
+    let [password, setpassword] = useState("")
 
-        setlogin({ ...login, [name]: value });
+    // let name, value;
+    const handleEmail = (e) => {
+        email = e.target.value;
+        setemail(email);
     }
+
+    function handlePassword (event) {
+        password = event.target.value;
+        setpassword(password);
+    } 
 
     const loginUser = async (e) => {
         try {
@@ -24,7 +30,7 @@ function Login() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    email: login.email, password: login.password
+                    email: email, password: password
                 })
             });
 
@@ -48,10 +54,15 @@ function Login() {
         setShowPassword(!showPassword);
     }
 
+    function removeDetails() {
+        setemail("")
+        setpassword("")
+    }
+
 
     return (
         <>
-            <button type="button" className="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#login">
+            <button type="button" className="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#login" onClick={removeDetails}>
                 Login
             </button>
 
@@ -66,7 +77,7 @@ function Login() {
                             <div className="modal-body">
                                 <div className="mb-3">
                                     <label htmlFor="emailLogin" className="form-label">Email address</label>
-                                    <input type="email" className="form-control" id="emailLogin" placeholder="name@example.com" value={login.email} onChange={handleInputs} name="email" />
+                                    <input type="email" className="form-control" id="emailLogin" placeholder="name@example.com" value={email} onChange={handleEmail} name="email" />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="passwordLogin" className="form-label">Password</label>
@@ -76,8 +87,8 @@ function Login() {
                                             className="form-control"
                                             id="passwordLogin"
                                             placeholder="Password"
-                                            value={login.password}
-                                            onChange={handleInputs}
+                                            value={password}
+                                            onChange={handlePassword}
                                             name="password"
                                         />
                                         <div className="input-group-append">
