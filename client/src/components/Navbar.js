@@ -1,5 +1,6 @@
 
 import Login from './Login';
+import Profile from './Profile';
 import SignUp from './SignUp';
 import { Link } from 'react-router-dom'
 
@@ -38,6 +39,9 @@ function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/education">Education</Link>
                             </li>
+                            <li className="nav-item">
+                                    <Link className="nav-link" to="/profile">Your Profile</Link>
+                                </li>
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Change Theme
@@ -55,7 +59,9 @@ function Navbar() {
                                             <div className="darkModeIco"><i className="fa-solid fa-moon"></i></div>
                                         </button>
                                     </li>
+
                                 </ul>
+                                
                             </li>
                         </ul>
 
@@ -63,6 +69,8 @@ function Navbar() {
                         <Login />
                         {/* Signup form modal */}
                         <SignUp />
+
+
                     </div>
                 </div>
             </nav>
