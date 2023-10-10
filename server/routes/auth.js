@@ -4,27 +4,12 @@ const router = express.Router();
 const User = require('../model/user');
 const bycrypt = require('bcryptjs');
 
-const Authenticate = require('../middleware/authenticate');
+// const Authenticate = require('../middleware/authenticate');
 
 require("../db/connect");
 
-// router.get('/', (req, res) => {
-//     res.send('This is a message from express router');
-// });
-
-// const middleware = (req, res, next) => {
-//     console.log("Waiting for login");
-//     next();
-// }
-
-// router.get('/about', middleware, (req, res) => {
-//     console.log("Login Successful");
-//     res.send("This is about page");
-// });
-
 // Registration
 
-// Async-Await method
 router.post('/register', async (req, res) => {
     const { firstName, lastName, userName, email, phone, password, cpassword } = req.body;
 
@@ -58,40 +43,9 @@ router.post('/register', async (req, res) => {
 
 });
 
-// Promises method
-
-// router.post('/register', (req, res) => {
-//     const {name, email, phone, password, cpassword} = req.body;
-//     // res.json({message: req.body});
-
-//     if(!name || !email || !phone || !password || !cpassword) {
-//         return res.status(422).json({error: "Details are not entered properly"});
-//     } 
-
-//     // databaseAttributeName:variableName
-//     // response is simply if user exist with that particular email exists or not
-//     User.findOne({email:email}).then((response) => {
-//         if(response) {
-//             return res.status(422).json({error: "Email is already in use"});
-//         }
-
-//         const user = new User({name, email, phone, password, cpassword});
-
-//         user.save().then(() => {
-//             res.status(201).json({message: "User registered successfully"}) 
-//         }).catch((error) => {
-//             res.status(500).json({message: "User was unable to register due to internal server error"})
-//         })
-//     }).catch(err => {
-//         console.log(err);
-//     })
-
-// });
-
-
 // Login
 router.post('/login', async (req, res) => {
-    
+
     try {
 
         const { email, password } = req.body;
@@ -100,12 +54,17 @@ router.post('/login', async (req, res) => {
         }
         else {
             const user = await User.findOne({ email: email });
-
             const comparePassword = await bycrypt.compare(password, user.password);
 
             if (user && comparePassword) {
                 const token = await user.generateAuthToken();
-                console.log(token);
+                // console.log(token);
+
+                res.cookie("Token", "DevanshKansagra");
+                // res.cookie("Token", token, {
+                //     expires: new Date(Date.now() + 2592000000),
+                //     httpOnly: true
+                // })
                 res.status(200).json({ message: "Succesfully logged in" });
             }
             else {
@@ -113,14 +72,8 @@ router.post('/login', async (req, res) => {
             }
 
         }
-
     } catch (error) {
         res.status(404).json({ error: "User not found" });
     }
 });
-
-router.get('/account', Authenticate, (req, res) => {
-
-})
-
-module.exports = router;
+module.exports = router;;
