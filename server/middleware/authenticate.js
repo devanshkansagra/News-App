@@ -18,6 +18,8 @@ const Authenticate = async (req, res, next) => {
         if(!rootUser) {
             throw new Error('User not found')
         }
+
+        // If User exists
         else {
             req.token = token;
             req.rootUser = rootUser;
