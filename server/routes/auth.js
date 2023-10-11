@@ -60,11 +60,11 @@ router.post('/login', async (req, res) => {
                 const token = await user.generateAuthToken();
                 // console.log(token);
 
-                res.cookie("Token", "DevanshKansagra");
-                // res.cookie("Token", token, {
-                //     expires: new Date(Date.now() + 2592000000),
-                //     httpOnly: true
-                // })
+                // res.cookie("Token", "DevanshKansagra");
+                res.cookie("token", token, {
+                    expires: new Date(Date.now() + 2592000000),
+                    httpOnly: true
+                })
                 res.status(200).json({ message: "Succesfully logged in" });
             }
             else {
@@ -76,4 +76,8 @@ router.post('/login', async (req, res) => {
         res.status(404).json({ error: "User not found" });
     }
 });
+
+router.get('/profile', authenticate, (req, res) => {
+
+})
 module.exports = router;;
