@@ -77,6 +77,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Profile route
 router.get('/profile', authenticate, (req, res) => {
 
 })
