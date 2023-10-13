@@ -11,7 +11,7 @@ const Authenticate = async (req, res, next) => {
         const verifyToken = jwt.verify(token, process.env.SECRETKEY);
 
         // Finding the user with the help of token
-        const rootUser = await User.findOne({_id:verifyToken._id, "tokens:token":token})
+        const rootUser = await User.findOne({_id:verifyToken._id, "tokens.token":token})
 
         // Check if the rootUser exists or not
         // If not then throw new error

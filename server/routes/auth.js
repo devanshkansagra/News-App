@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require('../model/user');
 const bycrypt = require('bcryptjs');
 
-// const Authenticate = require('../middleware/authenticate');
+const authenticate = require('../middleware/authenticate');
 
 require("../db/connect");
 
