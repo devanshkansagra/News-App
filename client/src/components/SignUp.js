@@ -154,7 +154,7 @@ function SignUp() {
 
                                 {/* Error: Cannot post the data */}
                                 {/* Solution: Added onClick event to the submit button */}
-                                <button type="submit" onClick={postData} className="btn btn-primary">Sign Up</button>
+                                <button type="submit" onClick={postData} className="btn btn-primary ">Sign Up</button>
                             </form>
                         </div>
                     </div>
