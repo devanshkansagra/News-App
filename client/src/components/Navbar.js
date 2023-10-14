@@ -1,7 +1,3 @@
-
-import Login from './Login';
-import Profile from './Profile';
-import SignUp from './SignUp';
 import { Link } from 'react-router-dom'
 
 function Navbar() {
@@ -40,8 +36,8 @@ function Navbar() {
                                 <Link className="nav-link" to="/education">Education</Link>
                             </li>
                             <li className="nav-item">
-                                    <Link className="nav-link" to="/profile">Your Profile</Link>
-                                </li>
+                                <Link className="nav-link" to="/profile">Your Profile</Link>
+                            </li>
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Change Theme
@@ -61,16 +57,14 @@ function Navbar() {
                                     </li>
 
                                 </ul>
-                                
+
                             </li>
                         </ul>
 
-                        {/* Login Form Modal */}
-                        <Login />
-                        {/* Signup form modal */}
-                        <SignUp />
-
-
+                        <div class="d-flex" role="search">
+                            <Link class="btn btn-primary mx-2" to="/login">Login</Link>
+                            <Link class="btn btn-primary mx-2" to="/signup">Sign Up</Link>
+                        </div>
                     </div>
                 </div>
             </nav>

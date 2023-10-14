@@ -65,99 +65,83 @@ function SignUp() {
         setShowPassword(!showPassword);
     }
 
-    function clearInputs() {
-        setuser({ ...user, [name]: "" });
-
-    }
     return (
-
         <>
-            <button type="button" className="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#signup" onClick={clearInputs}>
-                Sign Up
-            </button>
-
-            <div className="modal fade" id="signup" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="staticBackdropLabel">Signup to your account</h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h1 className="text-center mt-3 mt-5">SIGN UP TO YOUR ACCOUNT</h1>
+            <div className="container p-4 shadow-lg card">
+                <div className="container">
+                    <form method="POST">
+                        <div className="mb-3">
+                            <label htmlFor="signupFname" className="form-label">First Name</label>
+                            <input type="text" value={user.firstName} className="form-control" id="signupFname" placeholder="First Name" onChange={handleInputs} name="firstName" />
                         </div>
-                        <div className="modal-body">
-                            <form method="POST">
-                                <div className="mb-3">
-                                    <label htmlFor="signupFname" className="form-label">First Name</label>
-                                    <input type="text" value={user.firstName} className="form-control" id="signupFname" placeholder="First Name" onChange={handleInputs} name="firstName" />
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="signUpLname" className="form-label">Last name</label>
-                                    <input type="text" value={user.lastName} className="form-control" id="signUpLname" placeholder="Last Name" onChange={handleInputs} name="lastName" />
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="signupUname" className="form-label">Username</label>
-                                    <input type="text" value={user.userName} className="form-control" id="signupUname" placeholder="Username" onChange={handleInputs} name="userName" />
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="signupPhone" className="form-label">Phone Number</label>
-                                    <input type="number" value={user.phone} className="form-control" id="signupPhone" placeholder="Phone Number" onChange={handleInputs} name="phone" />
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="signupEmail" className="form-label">Email address</label>
-                                    <input type="email" value={user.email} className="form-control" id="signupEmail" placeholder="name@example.com" onChange={handleInputs} name="email" />
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="signupPassword" className="form-label">Password</label>
-                                    <div className="input-group">
-                                        <input
-                                            type={showPassword ? "text" : "password"}
-                                            value={user.password}
-                                            className="form-control"
-                                            id="signupPassword"
-                                            placeholder="Password"
-                                            onChange={handleInputs}
-                                            name="password"
-                                        />
-                                        <div className="input-group-append">
-                                            <button
-                                                className="btn btn-outline-secondary"
-                                                type="button"
-                                                onClick={handleShowPassword}
-                                            >
-                                                {showPassword ? "Hide" : "Show"}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="signupCpassword" className="form-label">Confirm Password</label>
-                                    <div className="input-group">
-                                        <input
-                                            type={showPassword ? "text" : "password"}
-                                            value={user.cpassword}
-                                            className="form-control"
-                                            id="signupCpassword"
-                                            placeholder="Confirm password"
-                                            onChange={handleInputs}
-                                            name="cpassword"
-                                        />
-                                        <div className="input-group-append">
-                                            <button
-                                                className="btn btn-outline-secondary"
-                                                type="button"
-                                                onClick={handleShowPassword}
-                                            >
-                                                {showPassword ? "Hide" : "Show"}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Error: Cannot post the data */}
-                                {/* Solution: Added onClick event to the submit button */}
-                                <button type="submit" onClick={postData} className="btn btn-primary ">Sign Up</button>
-                            </form>
+                        <div className="mb-3">
+                            <label htmlFor="signUpLname" className="form-label">Last name</label>
+                            <input type="text" value={user.lastName} className="form-control" id="signUpLname" placeholder="Last Name" onChange={handleInputs} name="lastName" />
                         </div>
-                    </div>
+                        <div className="mb-3">
+                            <label htmlFor="signupUname" className="form-label">Username</label>
+                            <input type="text" value={user.userName} className="form-control" id="signupUname" placeholder="Username" onChange={handleInputs} name="userName" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="signupPhone" className="form-label">Phone Number</label>
+                            <input type="number" value={user.phone} className="form-control" id="signupPhone" placeholder="Phone Number" onChange={handleInputs} name="phone" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="signupEmail" className="form-label">Email address</label>
+                            <input type="email" value={user.email} className="form-control" id="signupEmail" placeholder="name@example.com" onChange={handleInputs} name="email" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="signupPassword" className="form-label">Password</label>
+                            <div className="input-group">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    value={user.password}
+                                    className="form-control"
+                                    id="signupPassword"
+                                    placeholder="Password"
+                                    onChange={handleInputs}
+                                    name="password"
+                                />
+                                <div className="input-group-append">
+                                    <button
+                                        className="btn btn-outline-secondary"
+                                        type="button"
+                                        onClick={handleShowPassword}
+                                    >
+                                        {showPassword ? "Hide" : "Show"}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="signupCpassword" className="form-label">Confirm Password</label>
+                            <div className="input-group">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    value={user.cpassword}
+                                    className="form-control"
+                                    id="signupCpassword"
+                                    placeholder="Confirm password"
+                                    onChange={handleInputs}
+                                    name="cpassword"
+                                />
+                                <div className="input-group-append">
+                                    <button
+                                        className="btn btn-outline-secondary"
+                                        type="button"
+                                        onClick={handleShowPassword}
+                                    >
+                                        {showPassword ? "Hide" : "Show"}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Error: Cannot post the data */}
+                        {/* Solution: Added onClick event to the submit button */}
+                        <button type="submit" onClick={postData} className="btn btn-primary ">Sign Up</button>
+                    </form>
                 </div>
             </div>
         </>

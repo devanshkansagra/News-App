@@ -16,10 +16,10 @@ function Login() {
         setemail(email);
     }
 
-    function handlePassword (event) {
+    function handlePassword(event) {
         password = event.target.value;
         setpassword(password);
-    } 
+    }
 
     const loginUser = async (e) => {
         try {
@@ -54,59 +54,43 @@ function Login() {
         setShowPassword(!showPassword);
     }
 
-    function removeDetails() {
-        setemail("")
-        setpassword("")
-    }
-
 
     return (
         <>
-            <button type="button" className="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#login" onClick={removeDetails}>
-                Login
-            </button>
-
-            <div className="modal fade" id="login" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="staticBackdropLabel">Login To your account</h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h1 className="text-center mt-5">LOGIN TO YOUR ACCOUNT</h1>
+            <div className="card p-4 mt-5 shadow-lg container">
+                <form method="post">
+                    <div className="modal-body">
+                        <div className="mb-3">
+                            <label htmlFor="emailLogin" className="form-label">Email address</label>
+                            <input type="email" className="form-control" id="emailLogin" placeholder="name@example.com" value={email} onChange={handleEmail} name="email" />
                         </div>
-                        <form method="post">
-                            <div className="modal-body">
-                                <div className="mb-3">
-                                    <label htmlFor="emailLogin" className="form-label">Email address</label>
-                                    <input type="email" className="form-control" id="emailLogin" placeholder="name@example.com" value={email} onChange={handleEmail} name="email" />
+                        <div className="mb-3">
+                            <label htmlFor="passwordLogin" className="form-label">Password</label>
+                            <div className="input-group">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    className="form-control"
+                                    id="passwordLogin"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={handlePassword}
+                                    name="password"
+                                />
+                                <div className="input-group-append">
+                                    <button
+                                        className="btn btn-outline-secondary"
+                                        type="button"
+                                        onClick={handleShowPassword}
+                                    >
+                                        {showPassword ? "Hide" : "Show"}
+                                    </button>
                                 </div>
-                                <div className="mb-3">
-                                    <label htmlFor="passwordLogin" className="form-label">Password</label>
-                                    <div className="input-group">
-                                        <input
-                                            type={showPassword ? "text" : "password"}
-                                            className="form-control"
-                                            id="passwordLogin"
-                                            placeholder="Password"
-                                            value={password}
-                                            onChange={handlePassword}
-                                            name="password"
-                                        />
-                                        <div className="input-group-append">
-                                            <button
-                                                className="btn btn-outline-secondary"
-                                                type="button"
-                                                onClick={handleShowPassword}
-                                            >
-                                                {showPassword ? "Hide" : "Show"}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" className="btn btn-primary" onClick={loginUser}>Login</button>
                             </div>
-                        </form>
+                        </div>
+                        <button type="submit" className="btn btn-primary" onClick={loginUser}>Login</button>
                     </div>
-                </div>
+                </form>
             </div>
         </>
     )

@@ -3,6 +3,8 @@ import Navbar from './components/Navbar';
 import News from './components/News';
 import { Route, Routes } from 'react-router-dom'
 import Profile from './components/Profile';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
 
 function App() {
 
@@ -17,6 +19,8 @@ function App() {
         <Route path='/entertainment' element={<News category="entertainment"/>}/>
         <Route path='/education' element={<News category="education"/>}/>
         <Route path='/profile' element={<Profile />}/>
+        <Route path='/signup' element={<SignUp />}/>
+        <Route path='/login' element={<Login />}/>
       </Routes>
     </>
   );

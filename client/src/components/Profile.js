@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 function Profile(props) {
 
+    const navigate = useNavigate();
     const callProfilePage = async (req, res) => {
         try {
 
@@ -26,11 +28,12 @@ function Profile(props) {
 
         } catch (error) {
             console.log(error);
+            navigate('/signup')
         }
     }
     useEffect(() => {
         callProfilePage();
-    }, [])
+    })
     return (
         <>
             <section>
