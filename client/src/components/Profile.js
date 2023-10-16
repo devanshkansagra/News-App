@@ -1,31 +1,35 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function Profile(props) {
+function Profile() {
 
     const navigate = useNavigate();
-    const callProfilePage = async (req, res) => {
+    // let [userData, setUserData] = useState(null)
+    
+    const callProfilePage = async () => {
         try {
 
             const response = await fetch('/profile', {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
-                    "Content-type":"applications/json"
+                    "Content-type": "applications/json"
 
                 },
-                credentials:"include"
+                credentials: "include"
             })
 
             const data = await response.json();
-            // console.log(data);
+            // setUserData(data);
+            
+            console.log(data);
 
-            if(response.status !== 200) {
+            if (response.status !== 200) {
                 const err = new Error("Didn't get response");
                 throw err;
             }
 
-            navigate('/profile')
+            // navigate('/profile')
 
         } catch (error) {
             console.log(error);
@@ -34,7 +38,7 @@ function Profile(props) {
     }
     useEffect(() => {
         callProfilePage();
-    },[])
+    }, [])
     return (
         <>
             <section>
@@ -45,7 +49,7 @@ function Profile(props) {
                                 <div className="card mb-4">
                                     <div className="card-body text-center">
                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" className="rounded-circle img-fluid" />
-                                        <h5 className="my-3">John Smith</h5>
+                                        <h5 className="my-3">Jonathan Smith</h5>
                                         <p className="text-muted mb-1">Full Stack Developer</p>
                                         <p className="text-muted mb-4">Bay Area, San Francisco, CA</p>
                                         <div className="d-flex justify-content-center mb-2">
