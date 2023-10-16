@@ -3,34 +3,22 @@ const User = require('../model/user');
 
 const Authenticate = async (req, res, next) => {
     try {
-        
-        // Getting the token from cookies
-        const token = req.cookies.token;
 
-        // Verifying the token with the secret key
+        const token = req.cookies.token;
         const verifyToken = jwt.verify(token, process.env.SECRETKEY);
 
-        // Finding the user with the help of token
-        const rootUser = await User.findOne({_id:verifyToken._id, "tokens.token":token})
+        const rootUser = await User.findOne({ _id: verifyToken._id, "tokens.token": token })
 
-        // Check if the rootUser exists or not
-        // If not then throw new error
-        if(!rootUser) {
-            throw new Error('User not found')
-        }
+        if (!rootUser) { throw new Error('User not found') }
 
-        // If User exists
-        else {
-            req.token = token;
-            req.rootUser = rootUser;
-            req.userId = rootUser._id;
+        req.token = token;
+        req.rootUser = rootUser;
 
-            next();
-        }
+        next();
 
     } catch (error) {
-        res.status(401).send("Unauthorized");
-        console.log(error);
+        res.status(401).send("Unauthorized: No token Provided");
+        console.log(error)
     }
 };
 

@@ -46,6 +46,7 @@ router.post('/register', async (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
 
+    let token;
     try {
 
         const { email, password } = req.body;
@@ -57,14 +58,15 @@ router.post('/login', async (req, res) => {
             const comparePassword = await bycrypt.compare(password, user.password);
 
             if (user && comparePassword) {
-                const token = await user.generateAuthToken();
-                // console.log(token);
+                token = await user.generateAuthToken();
 
-                // res.cookie("Token", "DevanshKansagra");
-                res.cookie("token", token, {
+                res.cookie('token', token, {
                     expires: new Date(Date.now() + 2592000000),
                     httpOnly: true
                 })
+
+
+                // console.log(req.cookie);
                 res.status(200).json({ message: "Succesfully logged in" });
             }
             else {
@@ -79,6 +81,7 @@ router.post('/login', async (req, res) => {
 
 // Profile route
 router.get('/profile', authenticate, (req, res) => {
-
+    console.log("This is profile page");
+    res.send(req.rootUser);
 })
-module.exports = router;;
+module.exports = router;

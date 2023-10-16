@@ -18,22 +18,23 @@ function Profile(props) {
             })
 
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
 
-            if(res.status !== 200) {
+            if(response.status !== 200) {
                 const err = new Error("Didn't get response");
                 throw err;
             }
 
+            navigate('/profile')
 
         } catch (error) {
             console.log(error);
-            navigate('/signup')
+            navigate('/login')
         }
     }
     useEffect(() => {
         callProfilePage();
-    })
+    },[])
     return (
         <>
             <section>

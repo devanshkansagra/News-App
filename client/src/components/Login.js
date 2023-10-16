@@ -36,7 +36,7 @@ function Login() {
 
             const response = await data.json();
 
-            if (data.status === 404 || !response) {
+            if (data.status === 404 || !response || data.status === 400) {
                 window.alert("Invalid Credentials");
             }
             else {
