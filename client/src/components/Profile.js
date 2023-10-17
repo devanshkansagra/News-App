@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 function Profile() {
 
     const navigate = useNavigate();
-    // let [userData, setUserData] = useState(null)
+    let [userData, setUserData] = useState(null)
     
     const callProfilePage = async () => {
         try {
@@ -20,16 +20,14 @@ function Profile() {
             })
 
             const data = await response.json();
-            // setUserData(data);
-            
-            console.log(data);
+            setUserData(data);
 
             if (response.status !== 200) {
                 const err = new Error("Didn't get response");
                 throw err;
             }
 
-            // navigate('/profile')
+            navigate('/profile')
 
         } catch (error) {
             console.log(error);
@@ -42,14 +40,14 @@ function Profile() {
     return (
         <>
             <section>
-                <form method="GET">
+                <form method="GET" action='/profile'>
                     <div className="container py-5">
                         <div className="row">
                             <div className="col-lg-4">
                                 <div className="card mb-4">
                                     <div className="card-body text-center">
                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" className="rounded-circle img-fluid" />
-                                        <h5 className="my-3">Jonathan Smith</h5>
+                                        <h5 className="my-3">{userData && userData.firstName} {userData && userData.lastName}</h5>
                                         <p className="text-muted mb-1">Full Stack Developer</p>
                                         <p className="text-muted mb-4">Bay Area, San Francisco, CA</p>
                                         <div className="d-flex justify-content-center mb-2">
@@ -67,7 +65,7 @@ function Profile() {
                                                 <p className="mb-0">Full Name</p>
                                             </div>
                                             <div className="col-sm-9">
-                                                <p className="text-muted mb-0">Johnatan Smith</p>
+                                                <p className="text-muted mb-0">{userData && userData.firstName} {userData && userData.lastName}</p>
                                             </div>
                                         </div>
                                         <hr />
@@ -76,7 +74,7 @@ function Profile() {
                                                 <p className="mb-0">Email</p>
                                             </div>
                                             <div className="col-sm-9">
-                                                <p className="text-muted mb-0">example@example.com</p>
+                                                <p className="text-muted mb-0">{userData && userData.email}</p>
                                             </div>
                                         </div>
                                         <hr />
@@ -85,16 +83,7 @@ function Profile() {
                                                 <p className="mb-0">Phone</p>
                                             </div>
                                             <div className="col-sm-9">
-                                                <p className="text-muted mb-0">(097) 234-5678</p>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div className="row">
-                                            <div className="col-sm-3">
-                                                <p className="mb-0">Mobile</p>
-                                            </div>
-                                            <div className="col-sm-9">
-                                                <p className="text-muted mb-0">(098) 765-4321</p>
+                                                <p className="text-muted mb-0">{userData && userData.phone}</p>
                                             </div>
                                         </div>
                                         <hr />
