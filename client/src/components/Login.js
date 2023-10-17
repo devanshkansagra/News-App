@@ -1,4 +1,5 @@
 import { React, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
 
@@ -6,6 +7,8 @@ function Login() {
     //     email: "",
     //     password: "",
     // })
+
+    const navigate = useNavigate();
 
     let [email, setemail] = useState("")
     let [password, setpassword] = useState("")
@@ -36,11 +39,11 @@ function Login() {
 
             const response = await data.json();
 
-            if (data.status === 404 || !response || data.status === 400) {
-                window.alert("Invalid Credentials");
+            if(response) {
+                navigate('/profile');
             }
-            else {
-                window.alert("User Logged in successfully");
+            else if (data.status === 404 || !response || data.status === 400) {
+                window.alert("Invalid Credentials");
             }
 
         } catch (error) {

@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
+import Logout from './components/Logout';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/profile' element={<Profile />}/>
         <Route path='/signup' element={<SignUp />}/>
         <Route path='/login' element={<Login />}/>
+        <Route path='/logout' element={<Logout />}/>
       </Routes>
     </>
   );

@@ -64,6 +64,7 @@ function Navbar() {
                         <div className="d-flex" role="search">
                             <Link className="btn btn-primary mx-2" to="/login">Login</Link>
                             <Link className="btn btn-primary mx-2" to="/signup">Sign Up</Link>
+                            <Link className="btn btn-primary mx-2" to="/logout">Logout</Link>
                         </div>
                     </div>
                 </div>

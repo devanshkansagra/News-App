@@ -6,37 +6,35 @@ function Profile() {
     const navigate = useNavigate();
     let [userData, setUserData] = useState(null)
     
-    const callProfilePage = async () => {
-        try {
-
-            const response = await fetch('/profile', {
-                method: "GET",
-                headers: {
-                    Accept: "application/json",
-                    "Content-type": "applications/json"
-
-                },
-                credentials: "include"
-            })
-
-            const data = await response.json();
-            setUserData(data);
-
-            if (response.status !== 200) {
-                const err = new Error("Didn't get response");
-                throw err;
-            }
-
-            navigate('/profile')
-
-        } catch (error) {
-            console.log(error);
-            navigate('/login')
-        }
-    }
+   
     useEffect(() => {
+        const callProfilePage = async () => {
+            try {
+    
+                const response = await fetch('/profile', {
+                    method: "GET",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-type": "applications/json"
+    
+                    },
+                    credentials: "include"
+                })
+    
+                const data = await response.json();
+                setUserData(data);
+    
+                if (response.status !== 200) {
+                    const err = new Error("Didn't get response");
+                    throw err;
+                }
+            } catch (error) {
+                console.log(error);
+                navigate('/login')
+            }
+        }
         callProfilePage();
-    }, [])
+    }, [navigate])
     return (
         <>
             <section>

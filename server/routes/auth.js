@@ -84,4 +84,11 @@ router.get('/profile', authenticate, (req, res) => {
     console.log("This is profile page");
     res.send(req.rootUser);
 })
+router.get('/logout', (req, res) => {
+   res.clearCookie('token', {
+        path: '/'
+   })
+   console.log("User logout");
+   res.status(200).send("User logout");
+})
 module.exports = router;
