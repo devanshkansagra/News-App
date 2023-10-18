@@ -8,7 +8,7 @@ To install the project, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/devanshkansagra/News-App.git`
 2. Install the dependencies: `npm install`
-3. Create a `config.env` file in the root directory with the following variables:
+3. Create a `config.env` file in the server directory with the following variables:
    ```
    DATABASE=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>?retryWrites=true&w=majority
    PORT=5000
