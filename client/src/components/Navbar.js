@@ -1,11 +1,31 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom'
+import { UserContext } from '../App';
 
 function Navbar() {
+    const { state, dispatch } = useContext(UserContext)
     function changeToDark() {
         document.body.setAttribute("data-bs-theme", "dark");
     }
     function changeToLight() {
         document.body.setAttribute("data-bs-theme", "light");
+    }
+    const RenderMenu = () => {
+        if (state) {
+            return (
+                <>
+                    <Link className="btn btn-primary mx-2" to="/logout">Logout</Link>
+                </>
+            )
+        }
+        else {
+            return (
+                <>
+                    <Link className="btn btn-primary mx-2" to="/login">Login</Link>
+                    <Link className="btn btn-primary mx-2" to="/signup">Sign Up</Link>
+                </>
+            )
+        }
     }
     return (
         <>
@@ -62,9 +82,7 @@ function Navbar() {
                         </ul>
 
                         <div className="d-flex" role="search">
-                            <Link className="btn btn-primary mx-2" to="/login">Login</Link>
-                            <Link className="btn btn-primary mx-2" to="/signup">Sign Up</Link>
-                            <Link className="btn btn-primary mx-2" to="/logout">Logout</Link>
+                            <RenderMenu />
                         </div>
                     </div>
                 </div>

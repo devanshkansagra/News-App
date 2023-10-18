@@ -1,13 +1,10 @@
-import { React, useState } from 'react'
+import { React, useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../App';
 
 function Login() {
 
-    // const [login, setlogin] = useState({
-    //     email: "",
-    //     password: "",
-    // })
-
+    const { state, dispatch } = useContext(UserContext)
     const navigate = useNavigate();
 
     let [email, setemail] = useState("")
@@ -39,8 +36,9 @@ function Login() {
 
             const response = await data.json();
 
-            if(response) {
+            if (response) {
                 navigate('/profile');
+                dispatch({ type: "USER", payload: true })
             }
             else if (data.status === 404 || !response || data.status === 400) {
                 window.alert("Invalid Credentials");
