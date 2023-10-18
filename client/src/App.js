@@ -10,6 +10,7 @@ import { createContext, useReducer } from 'react';
 import { initialState, reducer } from '../src/reducer/UseReducer';
 export const UserContext = createContext();
 
+// Created a routing component
 const Routing = () => {
   return (
     <Routes>
